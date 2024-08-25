@@ -1,1 +1,7 @@
 node_modules
+EmailService.test.js
+EmailProvider.js
+EmailService.js
+types.js
+ExponentialBackoff.js
+index.js
