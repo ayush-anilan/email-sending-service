@@ -15,6 +15,7 @@ class EmailService {
       let attempt = 0;
       while (attempt < this.retryLimit) {
         try {
+          console.log(`Attempt ${attempt + 1} using ${provider.constructor.name}`);
           const success = await provider.sendEmail(recipient, subject, body);
           if (success) {
             console.log(`Email sent successfully by ${provider.constructor.name}`);
@@ -28,9 +29,10 @@ class EmailService {
         await exponentialBackoff(attempt); // Use exponential backoff before retrying
       }
 
-      console.log(`Failed to send email with ${provider.constructor.name} after ${this.retryLimit} attempts.`);
+      console.log(`Failed to send email with ${provider.constructor.name} after ${this.retryLimit} attempts. Switching to next provider.`);
     }
 
+    console.log('All providers failed to send the email.');
     return false; // All providers failed
   }
 }
