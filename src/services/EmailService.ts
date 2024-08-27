@@ -7,6 +7,10 @@ interface RateLimitRecord {
   startTime: number;
 }
 
+/**
+ * EmailService class to send emails using multiple providers with retries, fallbacks, rate limiting, and status tracking.
+ */
+
 class EmailService {
   private providers: EmailProvider[];
   private retryLimit: number;
@@ -15,6 +19,12 @@ class EmailService {
   private rateLimitWindowMs: number;
   private rateLimitStore: Map<string, RateLimitRecord>;
   private emailStatuses: EmailStatus[];  // Store email statuses
+
+    /**
+   * Creates an instance of EmailService.
+   * @param {IEmailProvider[]} providers - Array of email providers.
+   * @param {number} retryLimit - Number of retry attempts.
+   */
 
   constructor(
     providers: EmailProvider[],
@@ -58,6 +68,14 @@ class EmailService {
 
     return false;
   }
+
+    /**
+   * Sends an email using the available providers with retry and fallback mechanisms.
+   * @param {string} recipient - The email address of the recipient.
+   * @param {string} subject - The subject of the email.
+   * @param {string} body - The body content of the email.
+   * @returns {Promise<boolean>} - Promise resolving to true if email is sent successfully, false otherwise.
+   */
 
   async sendEmail(recipient: string, subject: string, body: string): Promise<boolean> {
     const idempotencyKey = this.generateIdempotencyKey(recipient, subject, body);

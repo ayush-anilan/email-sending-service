@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.0",
     "jest": "^29.7.0",
@@ -18,7 +19,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "email-sending-service": "file:"
+    "body-parser": "^1.20.2",
+    "email-sending-service": "file:",
+    "express": "^4.19.2"
   },
   "jest": {
     "preset": "ts-jest",
